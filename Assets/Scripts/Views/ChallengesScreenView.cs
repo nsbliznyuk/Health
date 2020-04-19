@@ -12,6 +12,12 @@ namespace Views
         private void Awake()
         {
             EventsManager.OpenChallengeAction += OpenChallengeAction;
+            EventsManager.ShowChallengesScreen += ShowChallengesScreen;
+        }
+
+        private void ShowChallengesScreen()
+        {
+           canvasControllerView.Show();
         }
 
         private void OpenChallengeAction(ChallengeData challengeData)
@@ -22,6 +28,7 @@ namespace Views
         private void OnDestroy()
         {
             EventsManager.OpenChallengeAction -= OpenChallengeAction;
+            EventsManager.ShowChallengesScreen -= ShowChallengesScreen;
         }
     }
 }

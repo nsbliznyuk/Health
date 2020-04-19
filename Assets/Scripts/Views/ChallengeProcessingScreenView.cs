@@ -1,6 +1,7 @@
 using System;
 using Data;
 using Helpers;
+using Model;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +15,13 @@ namespace Views
         public TextMeshProUGUI timerText;
         public Image timerRadialImage;
 
+        public GameObject restartButton;
+        public GameObject finishButton;
+
         private ChallengeData currentChallengeData;
         private bool timerIsRunning = false;
         private float currentTime = 0f;
-        
+
         private void Awake()
         {
             EventsManager.StartChallenge += StartChallengeAction;
@@ -25,6 +29,8 @@ namespace Views
 
         private void StartChallengeAction(ChallengeData challengeData)
         {
+            restartButton.SetActive(false);
+            finishButton.SetActive(true);
             currentChallengeData = challengeData;
             challengeView.Initialize(challengeData);
             canvasControllerView.Show();
@@ -38,23 +44,48 @@ namespace Views
             Debug.Log("Старт таймера на: " + duration);
         }
 
+        public void StopTimer()
+        {
+            timerIsRunning = false;
+        }
+
         private void Update()
         {
-            if(!timerIsRunning) return;
+            if (!timerIsRunning) return;
             currentTime -= Time.deltaTime;
 
             timerText.text = TimeSpan.FromSeconds(currentTime).ToString(@"mm\:ss");
 
             timerRadialImage.fillAmount = Mathf.InverseLerp(0, currentChallengeData.Duration, currentTime);
-            
+
             Debug.Log("Таймер: " + currentTime);
-            
+
             if (currentTime <= 0f)
             {
                 timerIsRunning = false;
+                failChallenge();
                 Debug.Log("Таймер остановлен!");
             }
+        }
 
+        public void FinishChallenge()
+        {
+            StopTimer();
+            canvasControllerView.Hide();
+            var result = new ChallengeResultModel(currentChallengeData, currentTime);
+            EventsManager.FinshChallenge.Invoke(result);
+        }
+
+        public void RestartChallenge()
+        {
+            EventsManager.StartChallenge.Invoke(currentChallengeData);
+        }
+
+        private void failChallenge()
+        {
+            finishButton.SetActive(false);
+            restartButton.SetActive(true);
+            EventsManager.FailChallenge.Invoke(currentChallengeData);
         }
 
         private void OnDestroy()
