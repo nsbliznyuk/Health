@@ -18,6 +18,9 @@ namespace Views
         public GameObject restartButton;
         public GameObject finishButton;
 
+        public Color startColor;
+        public Color endColor;
+        
         private ChallengeData currentChallengeData;
         private bool timerIsRunning = false;
         private float currentTime = 0f;
@@ -56,7 +59,12 @@ namespace Views
 
             timerText.text = TimeSpan.FromSeconds(currentTime).ToString(@"mm\:ss");
 
-            timerRadialImage.fillAmount = Mathf.InverseLerp(0, currentChallengeData.Duration, currentTime);
+            var t = Mathf.InverseLerp(0, currentChallengeData.Duration, currentTime);
+
+
+            timerRadialImage.fillAmount = t;
+
+            timerRadialImage.color = Color.Lerp(endColor, startColor, t);
 
             Debug.Log("Таймер: " + currentTime);
 

@@ -2,6 +2,7 @@ using Data;
 using Helpers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Views
 {
@@ -10,11 +11,15 @@ namespace Views
         [SerializeField]
         private TextMeshProUGUI titleText;
 
+        [SerializeField]
+        private Image iconImage;
+
         private ChallengeData currentChallengeData;
 
         public void Initialize(ChallengeData challengeData)
         {
             titleText.text = challengeData.Title;
+            iconImage.sprite = challengeData.Icon;
             currentChallengeData = challengeData;
         }
 

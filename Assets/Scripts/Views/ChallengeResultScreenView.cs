@@ -19,7 +19,7 @@ namespace Views
 
         private void FinishChallengeAction(ChallengeResultModel challengeResultModel)
         {
-            resultText.text = $"Time Left: {TimeSpan.FromSeconds(challengeResultModel.TimeLeft):mm\\:ss}";
+            resultText.text = $"<size=100>Молодец!</size>\nТы закончил раньше\nУ тебя осталось: {TimeSpan.FromSeconds(challengeResultModel.TimeLeft):mm\\:ss}";
             canvasControllerView.Show();
             
         }

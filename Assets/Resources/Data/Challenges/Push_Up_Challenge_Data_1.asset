@@ -17,3 +17,5 @@ MonoBehaviour:
     \u0442\u0435\u043B\u043E\u043C \u043A \u043F\u043E\u043B\u0443 \u0438 \u0434\u0440\u044B\u0433\u0430\u0439
     \u0440\u0443\u043A\u0430\u043C\u0438"
   duration: 5
+  icon: {fileID: 21300000, guid: a0d82bc00c5e8554c8d92db564f3f307, type: 3}
+  descriptionIcon: {fileID: 21300000, guid: b02850b7546b34b4abcb41cdb2fc7834, type: 3}

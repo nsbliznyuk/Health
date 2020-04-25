@@ -13,6 +13,10 @@ namespace Data
 
         public float Duration => duration;
 
+        public Sprite Icon => icon;
+
+        public Sprite DescriptionIcon => descriptionIcon;
+
         [SerializeField]
         private string title;
 
@@ -21,5 +25,11 @@ namespace Data
 
         [SerializeField]
         private float duration;
+
+        [SerializeField]
+        private Sprite icon;
+
+        [SerializeField]
+        private Sprite descriptionIcon;
     }
 }
